@@ -214,7 +214,6 @@
 
 	<div id = "escapeScreenGUI">
 		<div id = "escapeScreen"></div>
-		<div class="fps">?</div><div class="biome">None?</div>
 		<button id = "options-esc" class = "escapeButtons" style = "top : 30%">Options</button>
 		<button id = "backtogame" class = "escapeButtons" style = "top : 30%">Back To Game</button>
 		<button id = "titlescreensave" class = "escapeButtons" style = "top : 45%">Save and Quit to Title</button>
@@ -280,7 +279,7 @@
 			var xoff = 0;
 			var zoff = 0;
 			var inc = 0.05;
-			var renderDistance = 4
+			var renderDistance = 5
 			var amplitude = 50 + (Math.random() * 50);
 			var chunkSize = 10;
 			var depth = 10; // keeps track of the depth of the world (in terms of blocks)
@@ -330,17 +329,17 @@
 	 		cursor.style.left = ((0.5 * window.innerWidth) - (0.5 * cursor.width)).toString() + "px";
 	 		cursor.style.top = ((0.5 * window.innerHeight) - (0.5 * cursor.height)).toString() + "px";
 
-	 		// Stats/Debug
-			var Stats = {
-				fps: 0,
-				biome: "Unknown"
-			}
+	 		// Performance Stats
+	 		var stats = new Stats();
+	 		stats.showPanel(0); // 0:fps, 1:ms, 2:mb, 3+:custom
+	 		document.body.appendChild(stats.dom);
+
 	 		function animate(){
-				Stats.fps += 1
+	 			stats.begin();
+	 			stats.end();
 	 		}
 
-			setInterval(() => {/* fps */console.log(Stats.fps);Stats.fps = 0;document.querySelector(".fps").innerHTML = Stats.fps;/* biome */console.log(Stats.biome);Stats.biome = 0;document.querySelector(".biome").innerHTML = Stats.biome}, 1000)
-	 		setInterval(() => {requestAnimationFrame(animate)}, 10);
+	 		setInterval(() => {requestAnimationFrame(animate)}, 25);
 
 	 		function saveWorld(){
 	 			/*
@@ -393,17 +392,18 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			document.body.appendChild(renderer.domElement);
 
+			/*
 			var groundBox = new THREE.BoxBufferGeometry(25, 1, 50);
 			var groundMesh = new THREE.MeshBasicMaterial({color : 0x00ff00});
 			var ground = new THREE.Mesh(groundBox, groundMesh);
 			scene.add(ground);
 			ground.position.y = -5;
-
 			// Creating the border lines for ground
 			var edges = new THREE.EdgesGeometry(groundBox);
 			var line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color : 0x000000}));
 			scene.add(line);
 			line.position.y = -5;
+			*/
 
 			var faces = [
 				{ // left
@@ -562,7 +562,7 @@
 			];
 			var blockTypes = ["grass", "dirt", "cobblestone", "oakLog", "oakLeaves", "sand", "water", "glass", "brick", "plank"];
 			var biomeSize = 1; // the higher this number, the larger the biomes get
-			var treeDensity = 1; 
+			var treeDensity = 5; 
 			function getBiome(n){
 				if(n < 0.2){
 					return "plains";
@@ -577,16 +577,16 @@
 			var glassIndex = blockTypes.indexOf("glass");
 			var waterLevel = 0;
 
-			/*/ Setting Opacity of water - WATERTRANSTESTe
+			// Setting Opacity of water
 			for(var i = 0; i < waterTexture.length; i++){
 				if(i == 2 || i == 3){ // top and bottom
 					blocks[waterIndex].materialArray[i].transparent = true;
-					blocks[waterIndex].materialArray[i].opacity = 0.5;
+					blocks[waterIndex].materialArray[i].opacity = 0.7;
 				} else { // sides
 					blocks[waterIndex].materialArray[i].transparent = true;
-					blocks[waterIndex].materialArray[i].opacity = 0.2;
+					blocks[waterIndex].materialArray[i].opacity = 0.4;
 				}
-			} */
+			}
 			// Making glass transparent
 			for(var i = 0; i < glassTexture.length; i++){
 				blocks[glassIndex].materialArray[i].transparent = true;
@@ -744,7 +744,7 @@
 				right : "ArrowRight",
 				left : "ArrowLeft",
 				jump : " ", // " " = space
-				placeBlock: "rightClick"
+				placeBlock: "k"
 			};
 
 			var chunkMap = [];
@@ -808,7 +808,7 @@
 
 				keys.push(e.key);
 
-				if(e.key == controlOptions.jump /* fly lol && canJump == true  */ && controls.isLocked){
+				if(e.key == controlOptions.jump /* fly - beta/alpha only && canJump == true */ && controls.isLocked){
 					ySpeed = -1;
 					canJump = false;
 				}
@@ -1060,7 +1060,7 @@
 				keys = [];
 			});
 
-			var movingSpeed = 1;
+			var movingSpeed = 0.5;
 			var ySpeed = 0;
 			var acc = 0.065;
 
@@ -1258,8 +1258,8 @@
 
 					for(var i = 0; i < renderDistance; i++){
 						var chunk = [];
-						for(var x = lowestX + (i * chunkSize * 1); x < lowestX + (i * chunkSize * 1) + (chunkSize * 1); x = x + 1){
-							for(var z = lowestZ - (chunkSize * 1); z < lowestZ; z = z + 1){
+						for(var x = lowestX + (i * chunkSize * 5); x < lowestX + (i * chunkSize * 5) + (chunkSize * 5); x = x + 5){
+							for(var z = lowestZ - (chunkSize * 5); z < lowestZ; z = z + 5){
 								xoff = inc * x / 5;
 								zoff = inc * z / 5;
 								noise.seed(worldGen);
@@ -1346,7 +1346,7 @@
 												}
 												// LEAVES
 												if(e <= -6 && canPutLeaf){
-													if(parseFloat(treeNoise.toFixed(3)) != 0.01){
+													if(parseFloat(treeNoise.toFixed(3)) != 0.001){
 														let leafMatrix = new THREE.Matrix4().makeTranslation(
 															x,
 															v - (e * 5),
