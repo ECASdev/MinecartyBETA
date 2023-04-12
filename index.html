@@ -485,6 +485,9 @@
 			var sandSandl = loader.load("texture/sand/sand.png")
 			sandSandl.magFilter = THREE.NearestFilter;
 			var sandSand = new THREE.MeshBasicMaterial({map : sandSandl})
+			var waterWaterl = loader.load("texture/water/water.png")
+			waterWaterl.magFilter = THREE.NearestFilter;
+			var waterWater = new THREE.MeshBasicMaterial({map : waterWaterl})
 			var blockBox = new THREE.BoxBufferGeometry(5, 5, 5);
 			var grassTexture = [
 				grassside,
@@ -535,12 +538,12 @@
 				sandSand
 			];
 			var waterTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/water/water.webp")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/water/water.webp")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/water/water.webp")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/water/water.webp")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/water/water.webp")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/water/water.webp")})
+				waterWater,
+				waterWater,
+				waterWater,
+				waterWater,
+				waterWater,
+				waterWater
 			];
 			var glassTexture = [
 				new THREE.MeshBasicMaterial({map : loader.load("texture/glass/glass.png")}),
