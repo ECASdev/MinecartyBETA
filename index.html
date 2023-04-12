@@ -455,6 +455,7 @@
 			*/
 
 			var loader = new THREE.TextureLoader();
+
 			
 			/*
 			var materialArray = [
@@ -466,14 +467,20 @@
 				new THREE.MeshBasicMaterial({map : loader.load("texture/texture.png")}),
 			];
 			*/
+			var grassside = new THREE.MeshBasicMaterial({map : loader.load("texture/grass/side.jpg")})
+			grassside.magFilter = THREE.NearestFilter;
+			var grasstop = new THREE.MeshBasicMaterial({map : loader.load("texture/grass/top.jpg")})
+			grasstop.magFilter = THREE.NearestFilter;
+			var grassbottom = new THREE.MeshBasicMaterial({map : loader.load("texture/grass/bottom.jpg")})
+			grassbottom.magFilter = THREE.NearestFilter;
 			var blockBox = new THREE.BoxBufferGeometry(5, 5, 5);
 			var grassTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/grass/side.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/grass/side.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/grass/top.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/grass/bottom.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/grass/side.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/grass/side.jpg")})
+				grassside,
+				grassside,
+				grasstop,
+				grassbottom,
+				grassside,
+				grassside
 			];
 			var dirtTexture = [
 				new THREE.MeshBasicMaterial({map : loader.load("texture/dirt/dirt.jpg")}),
