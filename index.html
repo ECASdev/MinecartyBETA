@@ -469,7 +469,7 @@
 			*/
 			var grasssidel = loader.load("texture/grass/side.jpg")
 			grasssidel.magFilter = THREE.NearestFilter;
-			var grassside = new THREE.MeshBasicMaterial({map : loader.load("texture/grass/side.jpg")})
+			var grassside = new THREE.MeshBasicMaterial({map : grasssidel})
 			var grasstop = new THREE.MeshBasicMaterial({map : loader.load("texture/grass/top.jpg")})
 			grasstop.magFilter = THREE.NearestFilter;
 			var grassbottom = new THREE.MeshBasicMaterial({map : loader.load("texture/grass/bottom.jpg")})
