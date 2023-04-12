@@ -473,6 +473,12 @@
 			grasstop.magFilter = THREE.NearestFilter;
 			var grassbottom = new THREE.MeshBasicMaterial({map : loader.load("texture/grass/bottom.jpg")})
 			grassbottom.magFilter = THREE.NearestFilter;
+			var dirtDirt = new THREE.MeshBasicMaterial({map : loader.load("texture/dirt/dirt.jpg")})
+			dirtDirt.magFilter = THREE.NearestFilter;
+			var cobbleCobble = new THREE.MeshBasicMaterial({map : loader.load("texture/cobblestone/cobblestone.png")})
+			cobbleCobble.magFilter = THREE.NearestFilter;
+			var sandSand = new THREE.MeshBasicMaterial({map : loader.load("texture/sand/sand.png")})
+			sandSand.magFilter = THREE.NearestFilter;
 			var blockBox = new THREE.BoxBufferGeometry(5, 5, 5);
 			var grassTexture = [
 				grassside,
@@ -483,20 +489,20 @@
 				grassside
 			];
 			var dirtTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/dirt/dirt.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/dirt/dirt.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/dirt/dirt.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/dirt/dirt.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/dirt/dirt.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/dirt/dirt.jpg")})
+				dirtDirt,
+				dirtDirt,
+				dirtDirt,
+				dirtDirt,
+				dirtDirt,
+				dirtDirt
 			];
 			var cobblestoneTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/cobblestone/cobblestone.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/cobblestone/cobblestone.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/cobblestone/cobblestone.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/cobblestone/cobblestone.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/cobblestone/cobblestone.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/cobblestone/cobblestone.png")})
+				cobbleCobble,
+				cobbleCobble,
+				cobbleCobble,
+				cobbleCobble,
+				cobbleCobble,
+				cobbleCobble
 			];
 			var oakLogTexture = [
 				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLog/side.png")}),
@@ -515,12 +521,12 @@
 				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLeaves/oakLeaves.png")})
 			];
 			var sandTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/sand/sand.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/sand/sand.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/sand/sand.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/sand/sand.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/sand/sand.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/sand/sand.png")})
+				sandSand,
+				sandSand,
+				sandSand,
+				sandSand,
+				sandSand,
+				sandSand
 			];
 			var waterTexture = [
 				new THREE.MeshBasicMaterial({map : loader.load("texture/water/water.webp")}),
