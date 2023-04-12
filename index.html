@@ -175,7 +175,7 @@
 	<div id = "gameScreenGUI">
 		<img src = "texture/cobblestone/cobblestone.png" class = "hotbar" id = "slot1">
 		<img src = "texture/dirt/dirt.jpg" class = "hotbar" id = "slot2">
-		<img src = "texture/grass/side.jpg" class = "hotbar" id = "slot3">
+		<img src = "texture/grass/side.png" class = "hotbar" id = "slot3">
 		<img src = "texture/oakLeaves/oakLeaves.png" class = "hotbar" id = "slot4">
 		<img src = "texture/oakLog/side.png" class = "hotbar" id = "slot5">
 		<img src = "texture/sand/sand.png" class = "hotbar" id = "slot6">
@@ -467,7 +467,7 @@
 				new THREE.MeshBasicMaterial({map : loader.load("texture/texture.png")}),
 			];
 			*/
-			var grasssidel = loader.load("texture/grass/side.jpg")
+			var grasssidel = loader.load("texture/grass/side.png")
 			grasssidel.magFilter = THREE.NearestFilter;
 			var grassside = new THREE.MeshBasicMaterial({map : grasssidel})
 			var grasstopl = loader.load("texture/grass/top.jpg")
