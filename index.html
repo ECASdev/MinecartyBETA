@@ -576,29 +576,26 @@
 				{name : "dirt", materialArray : dirtTexture, mesh : new THREE.InstancedMesh(blockBox, dirtTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [1, 2], biomes : ["plains"]},
 				{name : "cobblestone", materialArray : cobblestoneTexture, mesh : new THREE.InstancedMesh(blockBox, cobblestoneTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [3, 4], biomes : ["plains", "desert"]},
 				{name : "oakLog", materialArray : oakLogTexture, mesh : new THREE.InstancedMesh(blockBox, oakLogTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains"]},
-				{name : "oakLeaves", materialArray : oakLeavesTexture, mesh : new THREE.InstancedMesh(blockBox, oakLeavesTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [1,2,3,4], biomes : ["leafland"]},
+				{name : "oakLeaves", materialArray : oakLeavesTexture, mesh : new THREE.InstancedMesh(blockBox, oakLeavesTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains"]},
 				{name : "sand", materialArray : sandTexture, mesh : new THREE.InstancedMesh(blockBox, sandTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2], biomes : ["desert"]},
 				{name : "water", materialArray : waterTexture, mesh : new THREE.InstancedMesh(blockBox, waterTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains", "desert"]},
-				{name : "glass", materialArray : glassTexture, mesh : new THREE.InstancedMesh(blockBox, glassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2, 3], biomes : ["glassland"]},
+				{name : "glass", materialArray : glassTexture, mesh : new THREE.InstancedMesh(blockBox, glassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains", "desert"]},
 				{name : "brick", materialArray : brickTexture, mesh : new THREE.InstancedMesh(blockBox, brickTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2, 3], biomes : ["testland"]},
-				{name : "plank", materialArray : plankTexture, mesh : new THREE.InstancedMesh(blockBox, plankTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : []},
+				{name : "plank", materialArray : plankTexture, mesh : new THREE.InstancedMesh(blockBox, plankTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains", "desert"]},
 			];
 			var blockTypes = ["grass", "dirt", "cobblestone", "oakLog", "oakLeaves", "sand", "water", "glass", "brick", "plank"];
 			var biomeSize = 1; // the higher this number, the larger the biomes get
 			var treeDensity = 5; 
 			function getBiome(n){
-				if(n < 0.050){
+				if(n < 0.2){
 					return "plains";
-				} else if(n < 0.075){
+				} else if(n < 0.3){
 					return "desert";
-				} else if(n >= 0.1){
+				} else if(n < 0.4){
 					return "testland";
-				} else if(n >= 0.125){
-					return "glassland";
-				} else if(n >= 0.15){
-					return "leafland";
+				}else if(n >= 0.4){
+					return "woodbiome";
 				}
-				console.log(n)
 			}
 
 			var oakLogIndex = blockTypes.indexOf("oakLog");
@@ -613,9 +610,8 @@
 					blocks[waterIndex].materialArray[i].transparent = true;
 					blocks[waterIndex].materialArray[i].opacity = 0.7;
 				} else { // sides
-					// Fix bug where water overlaps itself
 					blocks[waterIndex].materialArray[i].transparent = true;
-					blocks[waterIndex].materialArray[i].opacity = 0;
+					blocks[waterIndex].materialArray[i].opacity = 0.4;
 				}
 			}
 			// Making glass transparent
