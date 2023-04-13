@@ -270,10 +270,10 @@
 		}
 
  		function game(newOrLoad){
-			var seed = Math.random
- 			var worldGen = Math.random();
-	 		var biomeGen = Math.random();
-	 		var treesGen = Math.random();
+			var seed = Math.random()*Math.random()*200;
+ 			var worldGen = seed/180*Math.random();
+	 		var biomeGen = seed/190*Math.random();
+	 		var treesGen = seed/160*Math.random();
 			var WorldName;
 	 		var chunks = [];
 			var xoff = 0;
