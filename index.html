@@ -335,9 +335,9 @@
 	 		document.body.appendChild(stats.dom);
 
 	 		function animate(){
+				requestAnimationFrame(animate)
 	 			stats.begin();
 	 			stats.end();
-				requestAnimationFrame(animate)
 	 		}
 
 	 		function saveWorld(){
