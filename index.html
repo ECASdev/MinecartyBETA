@@ -111,7 +111,7 @@
 			display: none;
 		}
 		#singleplayerheading{
-			background: url(texture/dirt/dirt.jpg);
+			background: url(texture/dirt/dirt.png);
 			top: 0;
 			left: 0;
 			width: 100%;
@@ -148,7 +148,7 @@
 			box-shadow: 0px 20px 2px 1px rgba(0, 0, 0, .6);
 		}
 		#optionsscreen{
-			background: url(texture/dirt/dirt.jpg);
+			background: url(texture/dirt/dirt.png);
 			top: 0;
 			left: 0;
 			width: 100%;
@@ -174,7 +174,7 @@
 
 	<div id = "gameScreenGUI">
 		<img src = "texture/cobblestone/cobblestone.png" class = "hotbar" id = "slot1">
-		<img src = "texture/dirt/dirt.jpg" class = "hotbar" id = "slot2">
+		<img src = "texture/dirt/dirt.png" class = "hotbar" id = "slot2">
 		<img src = "texture/grass/side.png" class = "hotbar" id = "slot3">
 		<img src = "texture/oakLeaves/oakLeaves.png" class = "hotbar" id = "slot4">
 		<img src = "texture/oakLog/side.png" class = "hotbar" id = "slot5">
@@ -476,7 +476,7 @@
 			var grassbottoml = loader.load("texture/grass/bottom.jpg")
 			grassbottoml.magFilter = THREE.NearestFilter;
 			var grassbottom = new THREE.MeshBasicMaterial({map : grassbottoml})
-			var dirtDirtl = loader.load("texture/dirt/dirt.jpg")
+			var dirtDirtl = loader.load("texture/dirt/dirt.png")
 			dirtDirtl.magFilter = THREE.NearestFilter;
 			var dirtDirt = new THREE.MeshBasicMaterial({map : dirtDirtl})
 			var cobbleCobblel = loader.load("texture/cobblestone/cobblestone.png")
