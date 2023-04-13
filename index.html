@@ -841,7 +841,7 @@
 					raycaster.setFromCamera(pointer, camera);
 					var intersection;
 					var next = false;
-					var distance = 4;
+					var distance = 6;
 					var placedInWater = false;
 					for(var i = 0; i < blocks.length; i++){
 						var int = raycaster.intersectObject(blocks[i].mesh);
@@ -854,6 +854,7 @@
 							intersection = int;
 							distance = int[0].distance;
 						}
+					console.log("Placed Block @",raycaster,pointer,placedInWater)
 					}
 
 					if(next){
