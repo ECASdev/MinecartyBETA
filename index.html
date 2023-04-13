@@ -270,7 +270,7 @@
 		}
 
  		function game(newOrLoad){
-
+			var seed = Math.random
  			var worldGen = Math.random();
 	 		var biomeGen = Math.random();
 	 		var treesGen = Math.random();
@@ -280,14 +280,14 @@
 			var zoff = 0;
 			var inc = 0.05;
 			var renderDistance = 12
-			var amplitude = 50 + (Math.random() * 50);
+			var amplitude = 26 + (Math.random() * 26);
 			var chunkSize = 8;
 			var depth = 10; // keeps track of the depth of the world (in terms of blocks)
-			var minWorldY = -2000; // the minimum y coordinate of a block
+			var minWorldY = -20; // the minimum y coordinate of a block
 			var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 			camera.position.x = renderDistance * chunkSize / 2 * 5;
 			camera.position.z = renderDistance * chunkSize / 2 * 5;
-			camera.position.y = 150;
+			camera.position.y = 120;
 
 			var placedBlocks = [];
 			var brokenBlocks = [];
@@ -309,6 +309,7 @@
 				brokenBlocks = loadedData.editedBlocks.destroyed;
 				console.log(placedBlocks, brokenBlocks);
 				WorldName = loadedData.WorldName
+				seed = loadedData.seeds.seed
  			}
 
  			timeIntervalPictureChange = Infinity;
@@ -353,7 +354,8 @@
 	 				seeds : {
 	 					world : worldGen,
 	 					biome : biomeGen,
-	 					trees : treesGen
+	 					trees : treesGen,
+						seed: seed
 	 				},
 	 				cameraPosition : {
 	 					x : camera.position.x,
