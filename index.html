@@ -336,10 +336,9 @@
 
 	 		function animate(){
 	 			stats.begin();
+				requestAnimationFrame(animate)
 	 			stats.end();
 	 		}
-
-	 		setInterval(() => {requestAnimationFrame(animate)}, 25);
 
 	 		function saveWorld(){
 	 			/*
