@@ -279,9 +279,9 @@
 			var xoff = 0;
 			var zoff = 0;
 			var inc = 0.05;
-			var renderDistance = 14
+			var renderDistance = 12
 			var amplitude = 26 + (Math.random() * 26);
-			var chunkSize = 8;
+			var chunkSize = 7;
 			var depth = 50; // keeps track of the depth of the world (in terms of blocks)
 			var minWorldY = -50; // the minimum y coordinate of a block
 			var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -1260,7 +1260,7 @@
 
 				// INFINITE TERRAIN GENERATION PART!
 				var worldSize = chunkSize * renderDistance * 5;
-				var ratio = 0.4;www
+				var ratio = 0.4;
 				if(camera.position.z < lowestZBlock() + (worldSize * ratio)){ // 20 is 4 blocks
 					/*
 						
