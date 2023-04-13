@@ -468,6 +468,7 @@
 				new THREE.MeshBasicMaterial({map : loader.load("texture/texture.png")}),
 			];
 			*/
+
 			var grasssidel = loader.load("texture/grass/side.png")
 			grasssidel.magFilter = THREE.NearestFilter;
 			var grassside = new THREE.MeshBasicMaterial({map : grasssidel})
@@ -477,19 +478,34 @@
 			var grassbottoml = loader.load("texture/grass/bottom.jpg")
 			grassbottoml.magFilter = THREE.NearestFilter;
 			var grassbottom = new THREE.MeshBasicMaterial({map : grassbottoml})
+
 			var dirtDirtl = loader.load("texture/dirt/dirt.png")
 			dirtDirtl.magFilter = THREE.NearestFilter;
 			var dirtDirt = new THREE.MeshBasicMaterial({map : dirtDirtl})
+
 			var cobbleCobblel = loader.load("texture/cobblestone/cobblestone.png")
 			cobbleCobblel.magFilter = THREE.NearestFilter;
 			var cobbleCobble = new THREE.MeshBasicMaterial({map : cobbleCobblel})
+
 			var sandSandl = loader.load("texture/sand/sand.png")
 			sandSandl.magFilter = THREE.NearestFilter;
 			var sandSand = new THREE.MeshBasicMaterial({map : sandSandl})
+
 			var waterWaterl = loader.load("texture/water/water.png")
 			waterWaterl.magFilter = THREE.NearestFilter;
 			var waterWater = new THREE.MeshBasicMaterial({map : waterWaterl})
+
+			var bedrockBedrockl = loader.load("texture/bedrock/bedrock.png")
+			bedrockBedrockl.magFilter = THREE.NearestFilter;
+			var bedrockBedrock = new THREE.MeshBasicMaterial({map : bedrockBedrockl})
+
+			var brickBrickl = loader.load("texture/brick/brick.png")
+			brickBrickl.magFilter = THREE.NearestFilter;
+			var brickBrick = new THREE.MeshBasicMaterial({map : brickBrickl})
+
 			var blockBox = new THREE.BoxBufferGeometry(5, 5, 5);
+			
+
 			var grassTexture = [
 				grassside,
 				grassside,
@@ -555,12 +571,20 @@
 				new THREE.MeshBasicMaterial({map : loader.load("texture/glass/glass.png")})
 			];
 			var brickTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/brick/brick.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/brick/brick.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/brick/brick.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/brick/brick.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/brick/brick.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/brick/brick.png")})
+				brickBrick,
+				brickBrick,
+				brickBrick,
+				brickBrick,
+				brickBrick,
+				brickBrick
+			];
+			var bedrockTexture = [
+				bedrockBedrock,
+				bedrockBedrock,
+				bedrockBedrock,
+				bedrockBedrock,
+				bedrockBedrock,
+				bedrockBedrock
 			];
 			var plankTexture = [
 				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")}),
@@ -581,7 +605,8 @@
 				{name : "water", materialArray : waterTexture, mesh : new THREE.InstancedMesh(blockBox, waterTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains", "desert"]},
 				{name : "glass", materialArray : glassTexture, mesh : new THREE.InstancedMesh(blockBox, glassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains", "desert"]},
 				{name : "brick", materialArray : brickTexture, mesh : new THREE.InstancedMesh(blockBox, brickTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2], biomes : ["testland"]},
-				{name : "plank", materialArray : plankTexture, mesh : new THREE.InstancedMesh(blockBox, plankTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7], biomes : ["woodbiome"]},
+				{name : "plank", materialArray : plankTexture, mesh : new THREE.InstancedMesh(blockBox, plankTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["woodbiome"]},
+				{name : "bedrock", materialArray : bedrockTexture, mesh : new THREE.InstancedMesh(blockBox, bedrockTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [13,14,15], biomes : ["plains","desert","woodbiome","testland"]},
 			];
 			var blockTypes = ["grass", "dirt", "cobblestone", "oakLog", "oakLeaves", "sand", "water", "glass", "brick", "plank"];
 			var biomeSize = 1; // the higher this number, the larger the biomes get
