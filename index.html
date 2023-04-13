@@ -279,11 +279,11 @@
 			var xoff = 0;
 			var zoff = 0;
 			var inc = 0.05;
-			var renderDistance = 20
+			var renderDistance = 14
 			var amplitude = 26 + (Math.random() * 26);
 			var chunkSize = 8;
-			var depth = 10; // keeps track of the depth of the world (in terms of blocks)
-			var minWorldY = -20; // the minimum y coordinate of a block
+			var depth = 50; // keeps track of the depth of the world (in terms of blocks)
+			var minWorldY = -50; // the minimum y coordinate of a block
 			var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 			camera.position.x = renderDistance * chunkSize / 2 * 5;
 			camera.position.z = renderDistance * chunkSize / 2 * 5;
