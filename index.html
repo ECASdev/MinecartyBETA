@@ -612,8 +612,9 @@
 					blocks[waterIndex].materialArray[i].transparent = true;
 					blocks[waterIndex].materialArray[i].opacity = 0.7;
 				} else { // sides
+					// Fix bug where water overlaps itself
 					blocks[waterIndex].materialArray[i].transparent = true;
-					blocks[waterIndex].materialArray[i].opacity = 0.4;
+					blocks[waterIndex].materialArray[i].opacity = 0;
 				}
 			}
 			// Making glass transparent
