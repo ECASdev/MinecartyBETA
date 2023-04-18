@@ -1175,7 +1175,10 @@
 			var forback = 0; // 1 = forward, -1 = backward
 			var rightleft = 0; // 1 = right, -1 = left
 			var sprintSpeedInc = 1.6; // 30% faster than walking
+			console.log("[DEBUG] Camera.fov: " + camera.fov)
 			camera.fov = 90
+			console.log("[DEBUG] Camera.fov UP: " + camera.fov)
+			
 			function update(){	
 				player.updatePosition();
 
@@ -1194,7 +1197,6 @@
 									sprint = false;
 								}
 							}
-							camera.fov = 100
 						}
 					}
 					if(keys.includes(controlOptions.backward)){
