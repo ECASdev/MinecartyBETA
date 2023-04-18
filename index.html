@@ -627,7 +627,7 @@
 			var oakLeavesIndex = blockTypes.indexOf("oakLeaves");
 			var waterIndex = blockTypes.indexOf("water");
 			var glassIndex = blockTypes.indexOf("glass");
-			var waterLevel = -1000;
+			var waterLevel = 0;
 
 			// Setting Opacity of water
 			for(var i = 0; i < waterTexture.length; i++){
@@ -643,7 +643,7 @@
 			for(var i = 0; i < glassTexture.length; i++){
 				blocks[glassIndex].materialArray[i].transparent = true;
 			}
-
+			/*
 			for(var i = 0; i < renderDistance; i++){
 				for(j = 0; j < renderDistance; j++){
 					var chunk = [];
@@ -782,7 +782,7 @@
 					}
 					chunks.push(chunk);
 				}
-			}
+			}*/
 
 			for(var i = 0; i < blocks.length; i++){
 				scene.add(blocks[i].mesh)
