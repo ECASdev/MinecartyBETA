@@ -458,6 +458,34 @@
 			var loader = new THREE.TextureLoader();
 
 			
+			/*			SIMPLE SHADERS			*/
+			function simpleFragmentShader() {
+  				return `
+      uniform vec3 colorA; 
+      uniform vec3 colorB; 
+      varying vec3 vUv;
+
+      void main() {
+        gl_FragColor = vec4(mix(colorA, colorB, vUv.z), 1.0);
+      }
+  `;
+  function simpleVertexShader() {
+  return `
+    varying vec3 vUv; 
+
+    void main() {
+      vUv = position; 
+
+      vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+      gl_Position = projectionMatrix * modelViewPosition; 
+    }
+  `
+}
+  let shadermaterial =  new THREE.ShaderMaterial({
+    uniforms: uniforms,
+    fragmentShader: fragmentShader(),
+    vertexShader: vertexShader(),
+  })};
 			/*
 			var materialArray = [
 				new THREE.MeshBasicMaterial({map : loader.load("texture/texture.png")}),
@@ -608,34 +636,6 @@
 				{name : "plank", materialArray : plankTexture, mesh : new THREE.InstancedMesh(blockBox, plankTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["woodbiome"]},
 				{name : "bedrock", materialArray : bedrockTexture, mesh : new THREE.InstancedMesh(blockBox, bedrockTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [13,14,15], biomes : ["plains","desert","woodbiome","testland"]},
 			];
-			/*			SIMPLE SHADERS			*/
-			function simpleFragmentShader() {
-  				return `
-      uniform vec3 colorA; 
-      uniform vec3 colorB; 
-      varying vec3 vUv;
-
-      void main() {
-        gl_FragColor = vec4(mix(colorA, colorB, vUv.z), 1.0);
-      }
-  `;
-  function simpleVertexShader() {
-  return `
-    varying vec3 vUv; 
-
-    void main() {
-      vUv = position; 
-
-      vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
-      gl_Position = projectionMatrix * modelViewPosition; 
-    }
-  `
-}
-  let shadermaterial =  new THREE.ShaderMaterial({
-    uniforms: uniforms,
-    fragmentShader: fragmentShader(),
-    vertexShader: vertexShader(),
-  })};
   
 			console.log("[DEBUG] Camera.fov: " + camera.fov)
 			camera.fov = 90
