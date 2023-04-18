@@ -469,6 +469,7 @@
         gl_FragColor = vec4(mix(colorA, colorB, vUv.z), 1.0);
       }
   `;
+	}
   function simpleVertexShader() {
   return `
     varying vec3 vUv; 
@@ -480,12 +481,7 @@
       gl_Position = projectionMatrix * modelViewPosition; 
     }
   `
-}
-  let shadermaterial =  new THREE.ShaderMaterial({
-    uniforms: uniforms,
-    fragmentShader: fragmentShader(),
-    vertexShader: vertexShader(),
-  })};
+};
 			/*
 			var materialArray = [
 				new THREE.MeshBasicMaterial({map : loader.load("texture/texture.png")}),
