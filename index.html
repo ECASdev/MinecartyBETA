@@ -642,8 +642,9 @@
 			// Making glass transparent
 			for(var i = 0; i < glassTexture.length; i++){
 				blocks[glassIndex].materialArray[i].transparent = true;
+				blocks[glassIndex].materialArray[i].opacity = 0.5;
 			}
-			/*
+			
 			for(var i = 0; i < renderDistance; i++){
 				for(j = 0; j < renderDistance; j++){
 					var chunk = [];
@@ -782,7 +783,7 @@
 					}
 					chunks.push(chunk);
 				}
-			}*/
+			}
 
 			for(var i = 0; i < blocks.length; i++){
 				scene.add(blocks[i].mesh)
