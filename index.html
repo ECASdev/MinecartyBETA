@@ -608,6 +608,10 @@
 				{name : "plank", materialArray : plankTexture, mesh : new THREE.InstancedMesh(blockBox, plankTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["woodbiome"]},
 				{name : "bedrock", materialArray : bedrockTexture, mesh : new THREE.InstancedMesh(blockBox, bedrockTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [13,14,15], biomes : ["plains","desert","woodbiome","testland"]},
 			];
+			console.log("[DEBUG] Camera.fov: " + camera.fov)
+			camera.fov = 90
+			console.log("[DEBUG] Camera.fov UP: " + camera.fov)
+
 			var blockTypes = ["grass", "dirt", "cobblestone", "oakLog", "oakLeaves", "sand", "water", "glass", "brick", "plank"];
 			var biomeSize = 1; // the higher this number, the larger the biomes get
 			var treeDensity = 5; 
@@ -1175,9 +1179,6 @@
 			var forback = 0; // 1 = forward, -1 = backward
 			var rightleft = 0; // 1 = right, -1 = left
 			var sprintSpeedInc = 1.6; // 30% faster than walking
-			console.log("[DEBUG] Camera.fov: " + camera.fov)
-			camera.fov = 90
-			console.log("[DEBUG] Camera.fov UP: " + camera.fov)
 			
 			function update(){	
 				player.updatePosition();
