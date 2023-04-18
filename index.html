@@ -471,37 +471,37 @@
 
 			var grasssidel = loader.load("texture/grass/side.png")
 			grasssidel.magFilter = THREE.NearestFilter;
-			var grassside = new THREE.MeshBasicMaterial({map : grasssidel})
+			var grassside = new THREE.ShaderMaterial({map : grasssidel, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 			var grasstopl = loader.load("texture/grass/top.jpg")
 			grasstopl.magFilter = THREE.NearestFilter;
-			var grasstop = new THREE.MeshBasicMaterial({map : grasstopl})
+			var grasstop = new THREE.ShaderMaterial({map : grasstopl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 			var grassbottoml = loader.load("texture/grass/bottom.jpg")
 			grassbottoml.magFilter = THREE.NearestFilter;
-			var grassbottom = new THREE.MeshBasicMaterial({map : grassbottoml})
+			var grassbottom = new THREE.ShaderMaterial({map : grassbottoml, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 
 			var dirtDirtl = loader.load("texture/dirt/dirt.png")
 			dirtDirtl.magFilter = THREE.NearestFilter;
-			var dirtDirt = new THREE.MeshBasicMaterial({map : dirtDirtl})
+			var dirtDirt = new THREE.ShaderMaterial({map : dirtDirtl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 
 			var cobbleCobblel = loader.load("texture/cobblestone/cobblestone.png")
 			cobbleCobblel.magFilter = THREE.NearestFilter;
-			var cobbleCobble = new THREE.MeshBasicMaterial({map : cobbleCobblel})
+			var cobbleCobble = new THREE.ShaderMaterial({map : cobbleCobblel, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 
 			var sandSandl = loader.load("texture/sand/sand.png")
 			sandSandl.magFilter = THREE.NearestFilter;
-			var sandSand = new THREE.MeshBasicMaterial({map : sandSandl})
+			var sandSand = new THREE.ShaderMaterial({map : sandSandl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 
 			var waterWaterl = loader.load("texture/water/water.png")
 			waterWaterl.magFilter = THREE.NearestFilter;
-			var waterWater = new THREE.MeshBasicMaterial({map : waterWaterl})
+			var waterWater = new THREE.ShaderMaterial({map : waterWaterl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 
 			var bedrockBedrockl = loader.load("texture/bedrock/bedrock.png")
 			bedrockBedrockl.magFilter = THREE.NearestFilter;
-			var bedrockBedrock = new THREE.MeshBasicMaterial({map : bedrockBedrockl})
+			var bedrockBedrock = new THREE.ShaderMaterial({map : bedrockBedrockl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 
 			var brickBrickl = loader.load("texture/brick/brick.png")
 			brickBrickl.magFilter = THREE.NearestFilter;
-			var brickBrick = new THREE.MeshBasicMaterial({map : brickBrickl})
+			var brickBrick = new THREE.ShaderMaterial({map : brickBrickl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()})
 
 			var blockBox = new THREE.BoxBufferGeometry(5, 5, 5);
 			
@@ -608,6 +608,35 @@
 				{name : "plank", materialArray : plankTexture, mesh : new THREE.InstancedMesh(blockBox, plankTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["woodbiome"]},
 				{name : "bedrock", materialArray : bedrockTexture, mesh : new THREE.InstancedMesh(blockBox, bedrockTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [13,14,15], biomes : ["plains","desert","woodbiome","testland"]},
 			];
+			/*			SIMPLE SHADERS			*/
+			function simpleFragmentShader() {
+  				return `
+      uniform vec3 colorA; 
+      uniform vec3 colorB; 
+      varying vec3 vUv;
+
+      void main() {
+        gl_FragColor = vec4(mix(colorA, colorB, vUv.z), 1.0);
+      }
+  `;
+  function simpleVertexShader() {
+  return `
+    varying vec3 vUv; 
+
+    void main() {
+      vUv = position; 
+
+      vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+      gl_Position = projectionMatrix * modelViewPosition; 
+    }
+  `
+}
+  let shadermaterial =  new THREE.ShaderMaterial({
+    uniforms: uniforms,
+    fragmentShader: fragmentShader(),
+    vertexShader: vertexShader(),
+  })};
+  
 			console.log("[DEBUG] Camera.fov: " + camera.fov)
 			camera.fov = 90
 			console.log("[DEBUG] Camera.fov UP: " + camera.fov)
@@ -2019,7 +2048,7 @@
 					//console.log(intersection[0]);
 					if(!scene.children.includes(plane)){
 						var planeG = new THREE.PlaneBufferGeometry(5, 5);
-						var planeM = new THREE.MeshBasicMaterial({color : 0xffffff, side : THREE.FrontSide});
+						var planeM = new THREE.ShaderMaterial({color : 0xffffff, side : THREE.FrontSide, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader()});
 						planeM.transparent = true;
 						planeM.opacity = 0.5;
 						plane = new THREE.Mesh(planeG, planeM);
