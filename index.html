@@ -625,27 +625,27 @@ var ShaderUniform = {
 			];
 			function BlockMeshGenerator (block) {
 				if (block == 'grass'){
-					let bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'sand'){
-					let bm = new THREE.InstancedMesh(blockBox, sandTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, sandTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'brick'){
-					let bm = new THREE.InstancedMesh(blockBox, brickTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, brickTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'glass'){
-					let bm = new THREE.InstancedMesh(blockBox, glassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, glassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'dirt'){
-					let bm = new THREE.InstancedMesh(blockBox, dirtTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, dirtTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'cobblestone'){
-					let bm = new THREE.InstancedMesh(blockBox, cobblestoneTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, cobblestoneTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'oakLeaves'){
-					let bm = new THREE.InstancedMesh(blockBox, oakLeavesTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, oakLeavesTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'oakLog'){
-					let bm = new THREE.InstancedMesh(blockBox, oakLogTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, oakLogTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'water'){
-					let bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'plank'){
-					let bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else if (block == 'bedrock'){
-					let bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+					var bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
 				} else {
 					console.error("[SEVERE] BlockMeshGenerator block is invalid, cannot continue execution.")
 					alert("[SEVERE] BlockMeshGenerator block is invalid, cannot continue execution.")
