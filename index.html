@@ -655,6 +655,15 @@ var ShaderUniform = {
 				bm.recieveShadow=true
 				return bm
 			}
+			/* This is CHATGPT/Bing AI */
+			// Directional light - no ChatGPT description
+			const light = new THREE.DirectionalLight(0xffffff, 1);
+			light.castShadow = true
+			light.shadowCameraVisible = true;
+			// add the light to the scene
+			scene.add(light);
+			console.log("[DEBUG]", light)
+			/* This End of CHATGPT/Bing AI's code */
 			var blocks = [
 				{name : "grass", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [0], biomes : ["plains"]},
 				{name : "dirt", materialArray : dirtTexture, mesh : BlockMeshGenerator("dirt"), count : 0, range : [1, 2], biomes : ["plains"]},
@@ -2157,15 +2166,6 @@ var ShaderUniform = {
 
 
 
-				/* This is CHATGPT/Bing AI */
-				// Directional light - no ChatGPT description
-				const light = new THREE.DirectionalLight(0xffffff, 1);
-				light.castShadow = true
-				// add the light to the scene
-				scene.add(light);
-				light.shadowCameraVisible = true;
-				console.log("[DEBUG]", light)
-				/* This End of CHATGPT/Bing AI's code */
 				renderer.render(scene, camera);
 			}
 
