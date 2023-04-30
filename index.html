@@ -339,7 +339,6 @@
 
 	 		function animate(){
 				requestAnimationFrame(animate)
-	 			stats.update()
 	 		}
 
 	 		function saveWorld(){
@@ -2174,6 +2173,7 @@ var ShaderUniform = {
 				requestAnimationFrame(GameLoop);
 				update();
 				render();
+				stats.update()
 			}
 
 			GameLoop();
