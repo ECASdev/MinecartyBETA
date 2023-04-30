@@ -508,30 +508,6 @@ var ShaderUniform = {
 			grassbottoml.magFilter = THREE.NearestFilter;
 			var grassbottom = new THREE.MeshBasicMaterial({map : grassbottoml, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader(), uniforms: ShaderUniform})
 
-			var dirtDirtl = loader.load("texture/dirt/dirt.png")
-			dirtDirtl.magFilter = THREE.NearestFilter;
-			var dirtDirt = new THREE.MeshBasicMaterial({map : dirtDirtl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader(), uniforms: ShaderUniform})
-
-			var cobbleCobblel = loader.load("texture/cobblestone/cobblestone.png")
-			cobbleCobblel.magFilter = THREE.NearestFilter;
-			var cobbleCobble = new THREE.MeshBasicMaterial({map : cobbleCobblel, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader(), uniforms: ShaderUniform})
-
-			var sandSandl = loader.load("texture/sand/sand.png")
-			sandSandl.magFilter = THREE.NearestFilter;
-			var sandSand = new THREE.MeshBasicMaterial({map : sandSandl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader(), uniforms: ShaderUniform})
-
-			var waterWaterl = loader.load("texture/water/water.png")
-			waterWaterl.magFilter = THREE.NearestFilter;
-			var waterWater = new THREE.MeshBasicMaterial({map : waterWaterl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader(), uniforms: ShaderUniform})
-
-			var bedrockBedrockl = loader.load("texture/bedrock/bedrock.png")
-			bedrockBedrockl.magFilter = THREE.NearestFilter;
-			var bedrockBedrock = new THREE.MeshBasicMaterial({map : bedrockBedrockl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader(), Uniforms: ShaderUniform})
-
-			var brickBrickl = loader.load("texture/brick/brick.png")
-			brickBrickl.magFilter = THREE.NearestFilter;
-			var brickBrick = new THREE.MeshBasicMaterial({map : brickBrickl, fragmentShader: simpleFragmentShader(), vertexShader: simpleVertexShader(), Uniforms: ShaderUniform})
-
 			var blockBox = new THREE.BoxBufferGeometry(5, 5, 5);
 			
 
@@ -542,86 +518,6 @@ var ShaderUniform = {
 				grassbottom,
 				grassside,
 				grassside
-			];
-			var dirtTexture = [
-				dirtDirt,
-				dirtDirt,
-				dirtDirt,
-				dirtDirt,
-				dirtDirt,
-				dirtDirt
-			];
-			var cobblestoneTexture = [
-				cobbleCobble,
-				cobbleCobble,
-				cobbleCobble,
-				cobbleCobble,
-				cobbleCobble,
-				cobbleCobble
-			];
-			var oakLogTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLog/side.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLog/side.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLog/top.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLog/bottom.jpg")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLog/side.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLog/side.png")})
-			];
-			var oakLeavesTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLeaves/oakLeaves.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLeaves/oakLeaves.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLeaves/oakLeaves.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLeaves/oakLeaves.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLeaves/oakLeaves.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/oakLeaves/oakLeaves.png")})
-			];
-			var sandTexture = [
-				sandSand,
-				sandSand,
-				sandSand,
-				sandSand,
-				sandSand,
-				sandSand
-			];
-			var waterTexture = [
-				waterWater,
-				waterWater,
-				waterWater,
-				waterWater,
-				waterWater,
-				waterWater
-			];
-			var glassTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/glass/glass.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/glass/glass.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/glass/glass.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/glass/glass.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/glass/glass.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/glass/glass.png")})
-			];
-			var brickTexture = [
-				brickBrick,
-				brickBrick,
-				brickBrick,
-				brickBrick,
-				brickBrick,
-				brickBrick
-			];
-			var bedrockTexture = [
-				bedrockBedrock,
-				bedrockBedrock,
-				bedrockBedrock,
-				bedrockBedrock,
-				bedrockBedrock,
-				bedrockBedrock
-			];
-			var plankTexture = [
-				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")}),
-				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")})
 			];
 			function BlockMeshGenerator (block) {
 				if (block == 'grass'){
@@ -666,16 +562,16 @@ var ShaderUniform = {
 			/* This End of CHATGPT/Bing AI's code */
 			var blocks = [
 				{name : "grass", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [0], biomes : ["plains"]},
-				{name : "dirt", materialArray : dirtTexture, mesh : BlockMeshGenerator("dirt"), count : 0, range : [1, 2], biomes : ["plains"]},
-				{name : "cobblestone", materialArray : cobblestoneTexture, mesh : BlockMeshGenerator("cobblestone"), count : 0, range : [3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["plains", "desert", "testland"]},
-				{name : "oakLog", materialArray : oakLogTexture, mesh : BlockMeshGenerator("oakLog"), count : 0, range : [], biomes : ["plains"]},
-				{name : "oakLeaves", materialArray : oakLeavesTexture, mesh : BlockMeshGenerator("oakLeaves"), count : 0, range : [], biomes : ["plains"]},
-				{name : "sand", materialArray : sandTexture, mesh : BlockMeshGenerator("sand"), count : 0, range : [0, 1, 2], biomes : ["desert"]},
-				{name : "water", materialArray : waterTexture, mesh : BlockMeshGenerator("water"), count : 0, range : [], biomes : ["plains", "desert"]},
-				{name : "glass", materialArray : glassTexture, mesh : BlockMeshGenerator("glass"), count : 0, range : [], biomes : ["plains", "desert"]},
-				{name : "brick", materialArray : brickTexture, mesh : BlockMeshGenerator("brick"), count : 0, range : [0, 1, 2], biomes : ["testland"]},
-				{name : "plank", materialArray : plankTexture, mesh : BlockMeshGenerator("plank"), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["woodbiome"]},
-				{name : "bedrock", materialArray : bedrockTexture, mesh : BlockMeshGenerator("bedrock"), count : 0, range : [13,14,15], biomes : ["plains","desert","woodbiome","testland"]},
+				{name : "dirt", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [1, 2], biomes : ["plains"]},
+				{name : "cobblestone", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["plains", "desert", "testland"]},
+				{name : "oakLog", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [], biomes : ["plains"]},
+				{name : "oakLeaves", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [], biomes : ["plains"]},
+				{name : "sand", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [0, 1, 2], biomes : ["desert"]},
+				{name : "water", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [], biomes : ["plains", "desert"]},
+				{name : "glass", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [], biomes : ["plains", "desert"]},
+				{name : "brick", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [0, 1, 2], biomes : ["testland"]},
+				{name : "plank", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["woodbiome"]},
+				{name : "bedrock", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [13,14,15], biomes : ["plains","desert","woodbiome","testland"]},
 			];
   
 			console.log("[DEBUG] Camera.fov: " + camera.fov)
