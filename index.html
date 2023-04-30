@@ -2163,7 +2163,8 @@ var ShaderUniform = {
 				light.castShadow = true
 				// add the light to the scene
 				scene.add(light);
-
+				light.shadowCameraVisible = true;
+				console.log("[DEBUG]", light)
 				/* This End of CHATGPT/Bing AI's code */
 				renderer.render(scene, camera);
 			}
