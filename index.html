@@ -390,6 +390,7 @@
 	 		var scene = new THREE.Scene();
 	 		scene.background = new THREE.Color(0x87ceeb);
 			var renderer = new THREE.WebGLRenderer();
+			renderer.shadowMap.enabled = true;
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			document.body.appendChild(renderer.domElement);
 
@@ -2131,7 +2132,7 @@ var ShaderUniform = {
 
 				// set the position of the light
 				light.position.set(50, 50, 50);
-
+				light.castShadow = true
 				// add the light to the scene
 				scene.add(light);
 
