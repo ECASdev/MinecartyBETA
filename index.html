@@ -2121,6 +2121,21 @@ var ShaderUniform = {
 					}
 				}
 
+
+
+
+
+				/* This is CHATGPT/Bing AI */
+				// create a new PointLight
+				const light = new THREE.PointLight(0xffffff, 1, 100);
+
+				// set the position of the light
+				light.position.set(50, 50, 50);
+
+				// add the light to the scene
+				scene.add(light);
+
+				/* This End of CHATGPT/Bing AI's code */
 				renderer.render(scene, camera);
 			}
 
