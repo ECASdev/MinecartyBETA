@@ -388,7 +388,7 @@
 	 		});
 
 	 		var scene = new THREE.Scene();
-	 		scene.background = new THREE.Color(0x87ceeb);
+	 		scene.background = new THREE.Color(0x24aae3);
 			var renderer = new THREE.WebGLRenderer();
 			renderer.shadowMap.enabled = true;
 			renderer.setSize(window.innerWidth, window.innerHeight);
@@ -653,6 +653,7 @@ var ShaderUniform = {
 				}
 				bm.castShadow=true
 				bm.recieveShadow=true
+				console.log("Block Mesh Generated" + bm)
 				return bm
 			}
 			/* This is CHATGPT/Bing AI */
