@@ -1,7 +1,3 @@
-html
-
-Copy
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +12,7 @@ Copy
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/noisejs@0.8.0/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/noisejs@2.1.0/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
     <script>
       // Set up the scene, camera, and renderer
@@ -46,7 +42,7 @@ Copy
       const terrainSize = 10;
       const cubeSize = 0.5;
       const terrain = new THREE.Group();
-      const noise = new Noise(Math.random());
+      const noise = new noisejs.Noise(Math.random());
       for (let x = -terrainSize; x <= terrainSize; x++) {
         for (let z = -terrainSize; z <= terrainSize; z++) {
           const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
