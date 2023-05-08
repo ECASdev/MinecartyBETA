@@ -28,7 +28,7 @@
       const light = new THREE.DirectionalLight(0xffffff, 1);
       light.position.set(1, 1, 1);
       light.castShadow = true;
-      light.shadowSize.width = 1024;
+      light.shadow.mapSize.width = 1024;
       light.shadow.mapSize.height = 1024;
       light.shadow.camera.near = 0.5;
       light.shadow.camera.far = 500;
