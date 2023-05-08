@@ -52,7 +52,7 @@
             const grassGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
             const grassMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
             const grass = new THREE.Mesh(grassGeometry, grassMaterial);
-            const grassPosition = new THREE.Vector3(Math.round(x * cubeSize), y * cubeSize, Math.round(z * cubeSize));
+            const grassPosition = new THREE.Vector3(Math.round(x * cubeSize), Math.round(y * cubeSize), Math.round(z * cubeSize));
             grass.position.copy(grassPosition);
             grass.castShadow = true;
             grass.receiveShadow = true;
@@ -63,7 +63,7 @@
               const dirtGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
               const dirtMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
               const dirt = new THREE.Mesh(dirtGeometry, dirtMaterial);
-              const dirtPosition = new THREE.Vector3(Math.round(x * cubeSize), (y - 1) * cubeSize, Math.round(z * cubeSize));
+              const dirtPosition = new THREE.Vector3(Math.round(x * cubeSize), Math.round((y - 1) * cubeSize), Math.round(z * cubeSize));
               dirt.position.copy(dirtPosition);
               dirt.castShadow = true;
               dirt.receiveShadow = true;
