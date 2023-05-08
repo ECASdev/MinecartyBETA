@@ -42,11 +42,13 @@
       const terrainSize = 10;
       const cubeSize = 0.5;
       const terrain = new THREE.Group();
-      const noise = new Noise(Math.random());
+      const noise = new noisejs.Noise(Math.random());
       for (let x = -terrainSize; x <= terrainSize; x++) {
         for (let z = -terrainSize; z <= terrainSize; z++) {
           const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-          const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+          cubeGeometry.computeFaceNormals();
+          cubeGeometry.computeVertexNormals();
+          const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
           const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
           cube.position.set(x * cubeSize, noise.simplex3(x / 10, 0, z / 10) * 5, z * cubeSize);
           cube.castShadow = true;
