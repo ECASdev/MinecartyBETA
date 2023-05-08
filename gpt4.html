@@ -15,7 +15,7 @@
   </head>
   <body>
     <script>
-      // Set up the scene, camera, and renderer
+      // Set up the scene, camera, renderer
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -45,13 +45,25 @@
       const noise = new Noise(Math.random());
       for (let x = -terrainSize; x <= terrainSize; x++) {
         for (let z = -terrainSize; z <= terrainSize; z++) {
-          const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-          const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
-          const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-          cube.position.set(x * cubeSize, noise.simplex3(x / 10, 0, z / 10) * 5, z * cubeSize);
-          cube.castShadow = true;
-          cube.receiveShadow = true;
-          terrain.add(cube);
+          // Create the grass layer
+          const grassGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+          const grassMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+          const grass = new THREE.Mesh(grassGeometry, grassMaterial);
+          grass.position.set(x * cubeSize, noise.simplex3(x / 10, 0, z / 10) * 5, z * cubeSize);
+          grass.castShadow = true;
+          grass.receiveShadow = true;
+          terrain.add(grass);
+
+          // Create the dirt layers
+          for (let i = 1; i <= 3; i++) {
+            const dirtGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+            const dirtMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+            const dirt = new THREE.Mesh(dirtGeometry, dirtMaterial);
+            dirt.position.set(x * cubeSize, noise.simplex3(x / 10, -i / 10, z / 10) * 5 - i * cubeSize, z * cubeSize);
+            dirt.castShadow = true;
+            dirt.receiveShadow = true;
+            terrain.add(dirt);
+          }
         }
       }
       terrain.castShadow = true;
