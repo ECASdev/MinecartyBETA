@@ -42,7 +42,7 @@
       const terrainSize = 10;
       const cubeSize = 0.5;
       const terrain = new THREE.Group();
-      const noise = new noisejs.Noise(Math.random());
+      const noise = new Noise(Math.random());
       for (let x = -terrainSize; x <= terrainSize; x++) {
         for (let z = -terrainSize; z <= terrainSize; z++) {
           const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
