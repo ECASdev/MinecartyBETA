@@ -44,8 +44,10 @@
       const terrain = new THREE.Group();
       const noise = new Noise(Math.random());
       for (let x = -terrainSize; x <= terrainSize; x++) {
-        for (let y = 0; y <= 3; y++) {
-          for (let z = -terrainSize; z <= terrainSize; z++) {
+        for (let z = -terrainSize; z <= terrainSize; z++) {
+          // Calculate the height of the terrain using Perlin noise
+          const height = Math.floor(noise.perlin2(x / 10, z / 10) * 3) + 1;
+          for (let y = 0; y < height; y++) {
             // Create the grass layer
             const grassGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
             const grassMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
