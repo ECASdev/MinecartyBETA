@@ -6,8 +6,7 @@
     <style>
       body {
         margin: 0;
-        overflow: hidden;
-      }
+        overflow: hidden      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/noisejs@2.1.0/index.js"></script>
@@ -43,26 +42,35 @@
       const cubeSize = 0.5;
       const terrain = new THREE.Group();
       const noise = new Noise(Math.random());
+      const blockPositions = new Set();
       for (let x = -terrainSize; x <= terrainSize; x++) {
         for (let z = -terrainSize; z <= terrainSize; z++) {
           // Create the grass layer
           const grassGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
           const grassMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
           const grass = new THREE.Mesh(grassGeometry, grassMaterial);
-          grass.position.set(x * cubeSize, noise.simplex3(x / 10, 0, z / 10) * 5, z * cubeSize);
-          grass.castShadow = true;
-          grass.receiveShadow = true;
-          terrain.add(grass);
+          const grassPosition = new THREE.Vector3(Math.round(x * cubeSize), noise.simplex3(x / 10, 0, z / 10) * 5, Math.round(z * cubeSize));
+          if (!blockPositions.has(grassPosition.toString())) {
+            grass.position.copy(grassPosition);
+            grass.castShadow = true;
+            grass.receiveShadow = true;
+            terrain.add(grass);
+            blockPositions.add(grassPosition.toString());
+          }
 
           // Create the dirt layers
           for (let i = 1; i <= 3; i++) {
             const dirtGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
             const dirtMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
             const dirt = new THREE.Mesh(dirtGeometry, dirtMaterial);
-            dirt.position.set(x * cubeSize, noise.simplex3(x / 10, -i / 10, z / 10) * 5 - i * cubeSize, z * cubeSize);
-            dirt.castShadow = true;
-            dirt.receiveShadow = true;
-            terrain.add(dirt);
+            const dirtPosition = new THREE.Vector3(Math.round(x * cubeSize), Math.round(noise.simplex3(x / 10, -i / 10, z / 10) * 5 - i * cubeSize), Math.round(z * cubeSize));
+            if (!blockPositions.has(dirtPosition.toString())) {
+              dirt.position.copy(dirtPosition);
+              dirt.castShadow = true;
+              dirt.receiveShadow = true;
+              terrain.add(dirt);
+              blockPositions.add(dirtPosition.toString());
+            }
           }
         }
       }
