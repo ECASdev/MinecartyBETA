@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Minecarty (ChatGPT 3.5)</title>
+    <title>Minecarty (Chat GPT 3.5)</title>
     <style>
       body {
         margin: 0;
@@ -28,7 +28,7 @@
       const light = new THREE.DirectionalLight(0xffffff, 1);
       light.position.set(1, 1, 1);
       light.castShadow = true;
-      light.shadow.mapSize.width = 1024;
+      light.shadowSize.width = 1024;
       light.shadow.mapSize.height = 1024;
       light.shadow.camera.near = 0.5;
       light.shadow.camera.far = 500;
@@ -42,12 +42,9 @@
       const terrainSize = 10;
       const cubeSize = 0.5;
       const terrain = new THREE.Group();
-      const noise = new Noise(Math.random());
       for (let x = -terrainSize; x <= terrainSize; x++) {
-        for (let z = -terrainSize; z <= terrainSize; z++) {
-          // Calculate the height of the terrain using Perlin noise
-          const height = Math.floor(noise.perlin2(x / 10, z / 10) * 3) + 1;
-          for (let y = 0; y < height; y++) {
+        for (let y = 0; y <= 3; y++) {
+          for (let z = -terrainSize; z <= terrainSize; z++) {
             // Create the grass layer
             const grassGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
             const grassMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
