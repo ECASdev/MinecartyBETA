@@ -70,6 +70,11 @@
       terrain.receiveShadow = true;
       scene.add(terrain);
 
+      // Add a grid to the blocks
+      const grid = new THREE.GridHelper(20, 20, 0xffffff, 0xffffff);
+      grid.position.set(0, -1, 0);
+      scene.add(grid);
+
       // Position the camera
       camera.position.set(0, 5, 10);
 
