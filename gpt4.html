@@ -48,7 +48,7 @@
           const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
           const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
           const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-          cube.position.set(x * cubeSize, noise.perlin3(x / 10, 0, z / 10) * 5, z * cubeSize);
+          cube.position.set(x * cubeSize, noise.simplex3(x / 10, 0, z / 10) * 5, z * cubeSize);
           cube.castShadow = true;
           cube.receiveShadow = true;
           terrain.add(cube);
