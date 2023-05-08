@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Minecarty-ChatGPT</title>
+    <title>Minecraft-like Scene by GPT-3.5</title>
     <style>
       body {
         margin: 0;
@@ -20,20 +20,37 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
-      // Add a cube to the scene
-      const geometry = new THREE.BoxGeometry();
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-      const cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
+      // Add a directional light to the scene
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(1, 1, 1);
+      scene.add(light);
+
+      // Create a grid of cubes to represent the terrain
+      const terrainSize = 10;
+      const cubeSize = 0.5;
+      const terrain = new THREE.Group();
+      for (let x = -terrainSize; x <= terrainSize; x++) {
+        for (let z = -terrainSize; z <= terrainSize; z++) {
+          const cubeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+          const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+          const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+          cube.position.set(x * cubeSize, 0, z * cubeSize);
+          terrain.add(cube);
+        }
+      }
+      scene.add(terrain);
 
       // Position the camera
-      camera.position.z = 5;
+      camera.position.set(0, 5, 10);
+
+      // Add controls to the camera
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 0, 0);
+      controls.update();
 
       // Render the scene
       function animate() {
         requestAnimationFrame(animate);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
         renderer.render(scene, camera);
       }
       animate();
