@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Minecraft-like Scene by GPT-3.5</title>
+    <title>Minecraft-like Scene (GPT-3.5)</title>
     <style>
       body {
         margin: 0;
@@ -14,6 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.min.js"></script>
     <script>
+      import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
       // Set up the scene, camera, and renderer
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -45,7 +47,7 @@
       camera.position.set(0, 5, 10);
 
       // Add controls to the camera
-      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      const controls = new OrbitControls(camera, renderer.domElement);
       controls.target.set(0, 0, 0);
       controls.update();
 
