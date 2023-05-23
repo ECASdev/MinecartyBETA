@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Minecarty (ChatGPT3.5)</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/noisejs@2.1.0/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+  </head>
+  <body>
+    <script>
+      // Set up the scene, camera, renderer
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      document.body.appendChild(renderer.domElement);
+
+      // Add a directional light to the scene
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(1, 1, 1);
+      light.castShadow = true;
+      light.shadow.mapSize.width = 1024;
+      light.shadow.mapSize.height = 1024;
+      light.shadow.camera.near = 0.5;
+      light.shadow.camera.far = 500;
+      light.shadow.camera.left = -100;
+      light.shadow.camera.right = 100;
+      light.shadow.camera.top = 100;
+      light.shadow.camera.bottom = -100;
+      scene.add(light);
+
+      // Create a grid of cubes to represent the terrain
+      const terrainSize = 10;
+      const cubeSize = 0.5;
+      const terrain = new THREE.Group();
+      const noise = new Noise(Math.random());
+      for (let x = -terrainSize; x <= terrainSize; x++) {
+        for (let z = -terrainSize; z <= terrainSize; z++) {
+          // Calculate the height of the terrain using Perlin noise
+          const height = Math.floor(noise.perlin2(x / 10, z / 10) * 3) + 1;
+          for (let y = 0; y < height; y++) {
+            // Create the grass layer
+            const grassGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+            const grassMaterial = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+            const grass = new THREE.Mesh(grassGeometry, grassMaterial);
+            const grassPosition = new THREE.Vector3(Math.round(x * cubeSize), Math.round(y * cubeSize), Math.round(z * cubeSize));
+            grass.position.copy(grassPosition);
+            grass.castShadow = true;
+            grass.receiveShadow = true;
+            terrain.add(grass);
+
+            // Create the dirt layers
+            if (y > 0) {
+              const dirtGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
+              const dirtMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+              const dirt = new THREE.Mesh(dirtGeometry, dirtMaterial);
+              const dirtPosition = new THREE.Vector3(Math.round(x * cubeSize), Math.round((y - 1) * cubeSize), Math.round(z * cubeSize));
+              dirt.position.copy(dirtPosition);
+              dirt.castShadow = true;
+              dirt.receiveShadow = true;
+              terrain.add(dirt);
+            }
+          }
+        }
+      }
+      terrain.castShadow = true;
+      terrain.receiveShadow = true;
+      scene.add(terrain);
+
+      // Add a grid to the blocks
+      const grid = new THREE.GridHelper(20, 20, 0xffffff, 0xffffff);
+      grid.position.set(0, -1, 0);
+      scene.add(grid);
+
+      // Position the camera
+      camera.position.set(0, 5, 10);
+
+      // Add controls to the camera
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 0, 0);
+      controls.update();
+
+      // Render the scene
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
+</html>

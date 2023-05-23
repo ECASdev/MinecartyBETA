@@ -332,13 +332,13 @@
 
 	 		// Performance Stats
 	 		var stats = new Stats();
-	 		stats.showPanel(0); // 0:fps, 1:ms, 2:mb, 3+:custom
+	 		stats.showPanel(0);
+	 		stats.showPanel(1);
+	 		stats.showPanel(2); // 0:fps, 1:ms, 2:mb, 3+:custom
 	 		document.body.appendChild(stats.dom);
 
 	 		function animate(){
 				requestAnimationFrame(animate)
-	 			stats.begin();
-	 			stats.end();
 	 		}
 
 	 		function saveWorld(){
@@ -388,8 +388,9 @@
 	 		});
 
 	 		var scene = new THREE.Scene();
-	 		scene.background = new THREE.Color(0x87ceeb);
+	 		scene.background = new THREE.Color(0x24aae3);
 			var renderer = new THREE.WebGLRenderer();
+			renderer.shadowMap.enabled = true;
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			document.body.appendChild(renderer.domElement);
 
@@ -622,19 +623,60 @@ var ShaderUniform = {
 				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")}),
 				new THREE.MeshBasicMaterial({map : loader.load("texture/plank/plank.png")})
 			];
-
+			function BlockMeshGenerator (block) {
+				if (block == 'grass'){
+					var bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'sand'){
+					var bm = new THREE.InstancedMesh(blockBox, sandTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'brick'){
+					var bm = new THREE.InstancedMesh(blockBox, brickTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'glass'){
+					var bm = new THREE.InstancedMesh(blockBox, glassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'dirt'){
+					var bm = new THREE.InstancedMesh(blockBox, dirtTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'cobblestone'){
+					var bm = new THREE.InstancedMesh(blockBox, cobblestoneTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'oakLeaves'){
+					var bm = new THREE.InstancedMesh(blockBox, oakLeavesTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'oakLog'){
+					var bm = new THREE.InstancedMesh(blockBox, oakLogTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'water'){
+					var bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'plank'){
+					var bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else if (block == 'bedrock'){
+					var bm = new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth)
+				} else {
+					console.error("[SEVERE] BlockMeshGenerator block is invalid, cannot continue execution.")
+					alert("[SEVERE] BlockMeshGenerator block is invalid, cannot continue execution.")
+					document.querySelector("canvas").remove()
+				}
+				bm.castShadow=true
+				bm.recieveShadow=true
+				console.log("Block Mesh Generated" + bm)
+				return bm
+			}
+			/* This is CHATGPT/Bing AI */
+			// Directional light - no ChatGPT description
+			const light = new THREE.DirectionalLight(0xffffff, 1);
+			light.castShadow = true
+			light.shadowCameraVisible = true;
+			// add the light to the scene
+			scene.add(light);
+			console.log("[DEBUG]", light)
+			/* This End of CHATGPT/Bing AI's code */
 			var blocks = [
-				{name : "grass", materialArray : grassTexture, mesh : new THREE.InstancedMesh(blockBox, grassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0], biomes : ["plains"]},
-				{name : "dirt", materialArray : dirtTexture, mesh : new THREE.InstancedMesh(blockBox, dirtTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [1, 2], biomes : ["plains"]},
-				{name : "cobblestone", materialArray : cobblestoneTexture, mesh : new THREE.InstancedMesh(blockBox, cobblestoneTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["plains", "desert", "testland"]},
-				{name : "oakLog", materialArray : oakLogTexture, mesh : new THREE.InstancedMesh(blockBox, oakLogTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains"]},
-				{name : "oakLeaves", materialArray : oakLeavesTexture, mesh : new THREE.InstancedMesh(blockBox, oakLeavesTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains"]},
-				{name : "sand", materialArray : sandTexture, mesh : new THREE.InstancedMesh(blockBox, sandTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2], biomes : ["desert"]},
-				{name : "water", materialArray : waterTexture, mesh : new THREE.InstancedMesh(blockBox, waterTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains", "desert"]},
-				{name : "glass", materialArray : glassTexture, mesh : new THREE.InstancedMesh(blockBox, glassTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [], biomes : ["plains", "desert"]},
-				{name : "brick", materialArray : brickTexture, mesh : new THREE.InstancedMesh(blockBox, brickTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2], biomes : ["testland"]},
-				{name : "plank", materialArray : plankTexture, mesh : new THREE.InstancedMesh(blockBox, plankTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["woodbiome"]},
-				{name : "bedrock", materialArray : bedrockTexture, mesh : new THREE.InstancedMesh(blockBox, bedrockTexture, renderDistance * renderDistance * chunkSize * chunkSize * depth), count : 0, range : [13,14,15], biomes : ["plains","desert","woodbiome","testland"]},
+				{name : "grass", materialArray : grassTexture, mesh : BlockMeshGenerator("grass"), count : 0, range : [0], biomes : ["plains"]},
+				{name : "dirt", materialArray : dirtTexture, mesh : BlockMeshGenerator("dirt"), count : 0, range : [1, 2], biomes : ["plains"]},
+				{name : "cobblestone", materialArray : cobblestoneTexture, mesh : BlockMeshGenerator("cobblestone"), count : 0, range : [3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["plains", "desert", "testland"]},
+				{name : "oakLog", materialArray : oakLogTexture, mesh : BlockMeshGenerator("oakLog"), count : 0, range : [], biomes : ["plains"]},
+				{name : "oakLeaves", materialArray : oakLeavesTexture, mesh : BlockMeshGenerator("oakLeaves"), count : 0, range : [], biomes : ["plains"]},
+				{name : "sand", materialArray : sandTexture, mesh : BlockMeshGenerator("sand"), count : 0, range : [0, 1, 2], biomes : ["desert"]},
+				{name : "water", materialArray : waterTexture, mesh : BlockMeshGenerator("water"), count : 0, range : [], biomes : ["plains", "desert"]},
+				{name : "glass", materialArray : glassTexture, mesh : BlockMeshGenerator("glass"), count : 0, range : [], biomes : ["plains", "desert"]},
+				{name : "brick", materialArray : brickTexture, mesh : BlockMeshGenerator("brick"), count : 0, range : [0, 1, 2], biomes : ["testland"]},
+				{name : "plank", materialArray : plankTexture, mesh : BlockMeshGenerator("plank"), count : 0, range : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], biomes : ["woodbiome"]},
+				{name : "bedrock", materialArray : bedrockTexture, mesh : BlockMeshGenerator("bedrock"), count : 0, range : [13,14,15], biomes : ["plains","desert","woodbiome","testland"]},
 			];
   
 			console.log("[DEBUG] Camera.fov: " + camera.fov)
@@ -2121,6 +2163,10 @@ var ShaderUniform = {
 					}
 				}
 
+
+
+
+
 				renderer.render(scene, camera);
 			}
 
@@ -2128,6 +2174,7 @@ var ShaderUniform = {
 				requestAnimationFrame(GameLoop);
 				update();
 				render();
+				stats.update()
 			}
 
 			GameLoop();
